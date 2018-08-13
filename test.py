@@ -55,7 +55,7 @@ with tf.Session() as sess:
     i = 0
     try:
         while not coord.should_stop():
-            a = sess.run([net])
+            a = sess.run([net, endpoints['resnet_v2_50/block4'][0,0,0,:]])
             i += 1
             print(a)
             # for j in range(10):
