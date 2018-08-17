@@ -20,7 +20,8 @@ def preprocess(image, annotation=None, height=299, width=299):
         image = tf.image.convert_image_dtype(image, dtype=tf.float32)
         # image = tf.cast(image, tf.float32)
 
-    image = tf.image.resize_image_with_crop_or_pad(image, height, width)
+    # image = tf.image.resize_image_with_crop_or_pad(image, height, width)
+    image = tf.image.resize_images(image,(height, width))
     image.set_shape(shape=(height, width, 3))
 
     if not annotation == None:

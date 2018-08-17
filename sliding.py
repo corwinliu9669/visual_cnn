@@ -44,6 +44,9 @@ def cal_location(h_wind, w_wind, i, j, imgshape, config):
 if __name__ == '__main__':
     testpath = './sample_images/dog3.jpeg'
     img_origin = cv2.imread(testpath)
+    # img_origin = cv2.resize(img_origin, (img_origin.shape[0]//4, img_origin.shape[1]//4))
+    height = 299
+    img_origin = cv2.resize(img_origin, (int(img_origin.shape[1] * (height / img_origin.shape[0])), height))
     plot_blur = False
     save_img = True
     # window initialization
@@ -65,7 +68,7 @@ if __name__ == '__main__':
                 plt.imshow(img_tmp[:, :, [2, 1, 0]])
                 plt.show()
             if save_img:
-                fname = os.path.join(config.blur_img_dir, str(ind) + '.png')
+                fname = os.path.join(config.blur_img_dir, '%05d' % ind + '.png')
                 cv2.imwrite(fname, img_tmp)
                 ind += 1
                 if ind % config.save_print == 0:
